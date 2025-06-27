@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Image, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // Preventive Maintenance Screens
@@ -28,76 +29,88 @@ const CorrectiveStack = createStackNavigator();
 const InventoryStack = createStackNavigator();
 const NotificationsStack = createStackNavigator();
 
+// Custom header component with logo
+const CustomHeader = () => (
+  <View style={{ alignItems: 'center', paddingTop: 25, paddingBottom: 15, backgroundColor: 'white' }}>
+    <Image
+      source={require('./logo.jpeg')}
+      style={{ height: 40, resizeMode: 'contain' }}
+    />
+  </View>
+);
+
 const PreventiveStackNavigator = () => (
-  <PreventiveStack.Navigator>
+  <PreventiveStack.Navigator
+    screenOptions={{
+      header: () => <CustomHeader />
+    }}
+  >
     <PreventiveStack.Screen
       name="PreventiveList"
       component={PreventiveMaintenanceScreen}
-      options={{ title: 'Mantenimiento Preventivo' }}
     />
     <PreventiveStack.Screen
       name="PreventiveTaskDetail"
       component={PreventiveTaskDetailScreen}
-      options={({ route }) => ({
-        title: route.params?.isNew ? 'Nueva Tarea' : 'Detalle de Tarea',
-      })}
     />
     <PreventiveStack.Screen
       name="PreventiveDashboard"
       component={PreventiveDashboardScreen}
-      options={{ title: 'Dashboard Preventivo' }}
     />
   </PreventiveStack.Navigator>
 );
 
 const CorrectiveStackNavigator = () => (
-  <CorrectiveStack.Navigator>
+  <CorrectiveStack.Navigator
+    screenOptions={{
+      header: () => <CustomHeader />
+    }}
+  >
     <CorrectiveStack.Screen
       name="CorrectiveList"
       component={CorrectiveMaintenanceScreen}
-      options={{ title: 'Mantenimiento Correctivo' }}
     />
     <CorrectiveStack.Screen
       name="CorrectiveReport"
       component={CorrectiveReportScreen}
-      options={{ title: 'Reportar Falla' }}
     />
     <CorrectiveStack.Screen
       name="CorrectiveDetail"
       component={CorrectiveDetailScreen}
-      options={{ title: 'Detalle de Falla' }}
     />
   </CorrectiveStack.Navigator>
 );
 
 const InventoryStackNavigator = () => (
-  <InventoryStack.Navigator>
+  <InventoryStack.Navigator
+    screenOptions={{
+      header: () => <CustomHeader />
+    }}
+  >
     <InventoryStack.Screen
       name="InventoryList"
       component={InventoryScreen}
-      options={{ title: 'Inventario' }}
     />
     <InventoryStack.Screen
       name="InventoryDetail"
       component={InventoryDetailScreen}
-      options={({ route }) => ({
-        title: route.params?.isNew ? 'Nuevo Item' : 'Detalle de Item',
-      })}
     />
     <InventoryStack.Screen
       name="InventoryStats"
       component={InventoryStatsScreen}
-      options={{ title: 'Estadísticas' }}
     />
   </InventoryStack.Navigator>
 );
 
 const NotificationsStackNavigator = () => (
-  <NotificationsStack.Navigator>
+  <NotificationsStack.Navigator
+    screenOptions={{
+      header: () => <CustomHeader />
+    }}
+  >
     <NotificationsStack.Screen
       name="NotificationsList"
       component={NotificationsScreen}
-      options={{ title: 'Notificaciones' }}
     />
   </NotificationsStack.Navigator>
 );
